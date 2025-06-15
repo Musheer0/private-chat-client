@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean
+  image         String?
+  createdAt     DateTime
+  updatedAt     DateTime
+  sessions      Session[]
+  accounts      Account[]
+  messages      Message[]
+  send_req      Friend[] @relation("Sent-req")
+  reci_req      Friend[] @relation("Reci-req")
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}
+model Friend{
+  id String @id @default(cuid()) 
+  sender_id String
+  reciever_id String
+  Sender    User @relation(name: "Sent-req",fields: [sender_id],references: [id], onDelete: Cascade)
+  Reciever    User @relation(name: "Reci-req",fields: [reciever_id],references: [id], onDelete: Cascade)
+
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+enum Type{
+  USER
+  SYS
+  LOC
+}
+
+model Message{
+  id String @id @default(cuid()) 
+  sender_id String
+  friend_is String
+  chat      String @default("empty message")
+  latitude  Int?
+  longitute Int?
+  type      Type @default(USER)
+  Sender    User @relation(fields: [sender_id],references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime  @updatedAt
+}
