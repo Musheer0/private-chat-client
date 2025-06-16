@@ -1,7 +1,8 @@
 "use client"
 import { createAuthClient } from "better-auth/react"
-import { Github, Loader2Icon } from "lucide-react";
+import { ArrowRight, Loader2Icon } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from 'react'
 
 const page = () => {
@@ -12,42 +13,36 @@ const page = () => {
        return signIn.social({provider:"github"})
     }
   return (
-    <div className="flex items-center  justify-center h-screen w-full flex-col ">
-        <img src="/login-bg.png" className="absolute sm:opacity-100 opacity-40 top-0 left-0  
-        w-full h-full 
-        pointer-events-none
-         blur-3xl mix-blend-screen" alt="login background image" />
-        <div className="company flex sm:p-0 p-10 items-center gap-3 flex-col ">
-           <div className="relative">
-             <Image
-            src={'/logo.svg'}
-            width={40}
-            height={40}
-            alt="logo"
-            />
-            <img src="/logo.svg" className="absolute top-0 left-0 blur-xl" alt="logo-glow" />
-           </div>
-            <h1 className="text-4xl font-bold leading-none">Peer to Peer</h1>
+    <div className="flex bg-[#60FBA1] sm:bg-zinc-100 overflow-hidden items-center  justify-center h-[100dvh] w-full flex-col ">
+        <div className="logo relative">
+          <div className="company absolute top-0 left-1/2 -translate-x-1/2 p-5 flex items-center gap-2">
+            <Image src={'logo.svg'} width={35} height={35} alt="logo"/>
+            <p className="font-bold text-nowrap text-zinc-900">Private Chat</p>
+          </div>
+                <img src="/onboard.png" alt="loging screen" className="rounded-2xl max-w-[600px] p-2"/>
+
         </div>
-        <p className="leading-none text-muted-foreground text-xs">continue with your github account</p>
-        <div className="div py-7 mt-auto sm:p-0 p-10 items-center justify-center gap-4 sm:py-3 flex-col sm:bg-transparent bg-background/60 sm:border-none border border-foreground/10 border-b-0 sm:backdrop-blur-none backdrop-blur-lg relative sm:rounded-none rounded-t-4xl sm:mt-0 w-full flex">
+          <div className="div py-20 text-zinc-900 mt-auto  sm:p-0 p-10  items-center justify-center gap-4 sm:py-3 flex-col sm:bg-transparent relative overflow-hidden  sm:rounded-none sm:mt-0  flex">
+          <h1 className="text-3xl relative max-w-lg font-bold text-center ">
+            Ready to talk? It&apos;s just you, them, and a private call.
+          </h1>
             <button 
             disabled={isLoading}
             onClick={handleClick}
-            className="flex items-center mx-auto 
+            className="flex relative items-center mx-auto 
             cursor-pointer hover:opacity-80
-            justify-center font-semibold gap-2 w-full shadow-md sm:max-w-[300px] py-4
-             rounded-full bg-foreground text-background">
+            justify-center font-semibold gap-2 p-4 shadow-md spy-4
+             rounded-2xl bg-zinc-900 text-zinc-100">
                 {isLoading
                 ?
                 <Loader2Icon size={16} className="animate-spin"/>
                 :
                 <>
-                Login with Github <Github size={15}/>
+                <span className="hiddent sm:flex">Continue to Private chat</span> <ArrowRight/>
                 </>
                 }
                 </button>
-        <p className="text-sm text-muted-foreground">By creating an account you agress to our <span className="opacity-100 hover:underline cursor-pointer">terms and condtions</span></p>
+        <p className="text-sm text-center hidden sm:flex text-muted-foreground">By creating an account you agress to our<span className="opacity-100 hover:underline cursor-pointer"> terms and condtions</span></p>
         </div>
     </div>
   )
