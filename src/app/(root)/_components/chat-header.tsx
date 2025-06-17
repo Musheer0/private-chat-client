@@ -14,7 +14,6 @@ const ChatHeader = ({id}:{id:string}) => {
         setUser(chat?.Sender.email===data?.user.email ? chat?.Reciever :chat?.Sender)
     },[data,chat])
 if(chat && user){
-    console.log(chat,data)
   return (
     <div className='chat-header w-full p-3 border-b flex items-center justify-between'>
         <div className="user flex items-center gap-2">

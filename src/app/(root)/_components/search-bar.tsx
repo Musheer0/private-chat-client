@@ -6,7 +6,7 @@ import React, { useState,useRef } from 'react'
 
 const SearchBar = () => {
     const [query, SetQuery] = useState('');
-    const {searchUser, IsLoading: isLoading} = useSearch();
+    const {searchUser} = useSearch();
     const timeout = useRef<number|null>(null)
     const HandleSubmit = async(e:string)=>{
         const response = await searchUser(e);

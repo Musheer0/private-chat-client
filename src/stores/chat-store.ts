@@ -1,5 +1,5 @@
 import { prismachatwihtuser } from '@/query-types/prisma.query.type';
-import { Friend } from '@prisma/client'
+
 import {create} from 'zustand'
 import {persist} from 'zustand/middleware'
 type chat = prismachatwihtuser

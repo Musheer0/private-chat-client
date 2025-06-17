@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
    <div>
-    <a href="/chats">go to app</a>
+    <Link href={'/chats'}>Go to chat</Link>
    </div>
   );
 }

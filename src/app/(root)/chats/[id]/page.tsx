@@ -1,6 +1,7 @@
 import React from 'react'
 import ChatHeader from '../../_components/chat-header'
 import ChatInput from '../../_components/chat-input'
+import ChatBody from '../../_components/chat-body'
 interface props {
     id:string
 }
@@ -9,7 +10,7 @@ const page = async({params}:{params:Promise<props>}) => {
   return (
     <div className='flex flex-1 flex-col h-full'>
         <ChatHeader id={id}/>
-        <div className="body flex-1 w-full bg-red-500/10"></div>
+        <ChatBody id={id}/>
         <ChatInput id={id}/>
     </div>
   )

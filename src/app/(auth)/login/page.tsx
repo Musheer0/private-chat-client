@@ -2,10 +2,9 @@
 import { createAuthClient } from "better-auth/react"
 import { ArrowRight, Loader2Icon } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React, { useState } from 'react'
 
-const page = () => {
+const Page = () => {
     const {signIn} = createAuthClient();
     const [isLoading ,setIsloading] = useState(false);
     const handleClick = ()=>{
@@ -48,4 +47,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -12,7 +12,7 @@ const SideBar = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 740) // Tailwind sm breakpoint
+      setIsMobile(window.innerWidth < 740) 
     }
 
     handleResize()

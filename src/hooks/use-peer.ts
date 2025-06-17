@@ -28,3 +28,4 @@ class usePeer{
    };
 
 }
+export default new usePeer()
